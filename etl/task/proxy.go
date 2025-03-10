@@ -42,7 +42,7 @@ type ns struct {
 type Request struct {
 	T Type
 	// T == ChangeStream, Ns = {DB: "", Coll: ""}
-	Ns ns
+	Ns   ns
 	Data []bson.Raw
 }
 
@@ -54,12 +54,12 @@ type http struct {
 
 func (h *http) Do(ctx context.Context, ty Type, db, coll string, data []bson.Raw) (ok bool) {
 	ctx, logger := log.WithCtx(ctx)
-	ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
+	ctx, cancel := context.WithTimeout(ctx, 60*time.Second)
 	defer cancel()
 
 	logger.PushPrefix(fmt.Sprintf("send: %s, len(data): %d", ty, len(data)))
 	r := &Request{
-		T:    ty,
+		T: ty,
 		Ns: ns{
 			DB:   db,
 			Coll: coll,

@@ -23,7 +23,7 @@ const (
 	running
 	stopped
 
-	batch   int = 1000
+	batch   int = 100
 	maxWait     = 10 * time.Minute
 	retry       = 1 * time.Minute
 )

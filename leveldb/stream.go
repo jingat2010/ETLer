@@ -75,6 +75,9 @@ func (s *streamIter) Next(ctx context.Context, limit int) (values []db.StreamVal
 		lastId = s.iter.Key()
 		values = append(values, s.iter.Value())
 		ok = true
+		if len(values) >= limit {
+			break
+		}
 	}
 
 	return
